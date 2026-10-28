@@ -28,8 +28,8 @@ MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 Cube
 
 | Parameter | Value |
 |---|---|
-| Proportional Gain (Kp) | 0.004 |
-| Derivative Gain (Kd) | 0.02 |
+| Kp | 0.004 |
+| Kd | 0.02 |
 | Attitude Representation | Quaternion |
 | Euler Rotation Order | XYZ |
 | Control Method | PD Control |
