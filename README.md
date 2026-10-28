@@ -44,7 +44,7 @@ PD 제어기에서 생성된 본체 요구 토크를 X, Y, Z축으로 분리하�
 
 ### 3-1. X-axis Reaction Wheel
 
-![X-axis Reaction Wheel](PD_to_Wheel/images/X-axis_Wheel.png)
+![X-axis Reaction Wheel](PD_to_Wheel/images/X-axis_wheel.png)
 
 X축 리액션 휠은 PD 제어기에서 전달된 본체 요구 토크를 입력받아 휠 각속도와 휠 구동 토크를 계산하도록 구성하였습니다.
 
