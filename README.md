@@ -1,7 +1,7 @@
 
 # CubeSat 3-Axis Attitude Control Using Reaction Wheel
 
-MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 CubeSat 자세제어 시뮬레이션** 프로젝트입니다.
+MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 CubeSat 자세제어 시뮬레이션** 입니다.
 
 쿼터니언(Quaternion) 기반 자세 오차를 계산하고, PD 제어기를 통해 생성된 제어 토크를 X, Y, Z축 리액션 휠에 전달하여 위성의 자세를 목표 각도로 수렴시키는 폐루프(Closed-loop) 자세제어 시스템을 구현하였습니다.
 
