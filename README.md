@@ -6,7 +6,7 @@ MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 Cube
 
 ## 1. System Overview
 
-![Simulink System Overview](images/system.png)
+![Simulink System Overview](PD_to_Wheel/images/system.png)
 
 전체 자세제어 시스템은 다음 세 가지 주요 서브시스템으로 구성됩니다.
 
@@ -18,7 +18,7 @@ MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 Cube
 
 ## 2. PD Attitude Controller
 
-![PD Controller](images/pd_controller.png)
+![PD Controller](PD_to_Wheel/images/pd_controller.png)
 
 위성의 목표 자세와 현재 자세를 쿼터니언으로 표현하고, 두 쿼터니언 사이의 자세 오차를 계산합니다.
 
@@ -51,7 +51,7 @@ MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 Cube
 
 ## 3. Three-Axis Reaction Wheel
 
-![Reaction Wheel Subsystem](images/reaction_wheel.png)
+![Reaction Wheel Subsystem](PD_to_Wheel/images/reaction_wheel.png)
 
 PD 제어기에서 생성된 3축 제어 토크를 X, Y, Z축 리액션 휠에 각각 전달하도록 구성하였습니다.
 
@@ -73,7 +73,7 @@ PD 제어기에서 생성된 3축 제어 토크를 X, Y, Z축 리액션 휠에 �
 
 ## 4. CubeSat Attitude Dynamics
 
-![CubeSat Dynamics](images/cubesat_dynamics.png)
+![CubeSat Dynamics](PD_to_Wheel/images/cubesat_dynamics.png)
 
 CubeSat 동역학 모델은 리액션 휠 각속도와 구동 토크를 입력받아 위성 본체의 각속도 및 자세를 계산합니다.
 
@@ -105,7 +105,7 @@ CubeSat 동역학 모델은 리액션 휠 각속도와 구동 토크를 입력�
 
 ### Attitude Response
 
-![Attitude Control Result](images/simulation_result.png)
+![Attitude Control Result](PD_to_Wheel/images/simulation_result.png)
 
 시뮬레이션 결과, X, Y, Z축 모두 목표 자세로 안정적으로 수렴하는 것을 확인하였습니다.
 
