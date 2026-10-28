@@ -4,7 +4,7 @@ MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 Cube
 
 쿼터니언(Quaternion) 기반 자세 오차를 계산하고, PD 제어기를 통해 생성된 제어 토크를 X, Y, Z축 리액션 휠에 전달하여 위성의 자세를 목표 각도로 수렴시키는 폐루프(Closed-loop) 자세제어 시스템을 구현하였습니다.
 
-## 1. System Overview
+## 1. 시스템 개요
 
 ![Simulink System Overview](PD_to_Wheel/images/system.png)
 
@@ -16,7 +16,7 @@ MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 Cube
 
 각 서브시스템은 피드백 구조로 연결되며, 본체의 자세와 각속도를 제어기로 전달합니다.
 
-## 2. PD Attitude Controller
+## 2. PD 제어기
 
 ![PD Controller](PD_to_Wheel/images/pd_controller.png)
 
@@ -34,7 +34,7 @@ MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 Cube
 | Euler Rotation Order | XYZ |
 | Control Method | PD Control |
 
-## 3. Three-Axis Wheel
+## 3. 리액션 휠
 
 ![Reaction Wheel Subsystem](PD_to_Wheel/images/reaction_wheel.png)
 
@@ -42,7 +42,7 @@ PD 제어기에서 생성된 본체 요구 토크를 X, Y, Z축으로 분리하�
 
 각 리액션 휠은 입력된 토크 명령에 따라 휠 각속도와 휠 구동 토크를 계산하며, 세 축의 출력은 각각 통합되어 CubeSat 동역학 모델에 전달됩니다.
 
-### 3-1. X-axis Reaction Wheel
+### 3-1. X축 휠
 
 ![X-axis Reaction Wheel](PD_to_Wheel/images/X-axis_wheel.png)
 
@@ -54,7 +54,7 @@ X축 리액션 휠은 PD 제어기에서 전달된 본체 요구 토크를 입�
 
 **Y축과 Z축 리액션 휠에도 동일한 제어 및 동역학 구조를 적용**하여 3축 리액션 휠 시스템을 구성하였습니다.
 
-## 4. CubeSat Attitude Dynamics
+## 4. CubeSat 동역학
 
 ![CubeSat Dynamics](PD_to_Wheel/images/cubesat_dynamics.png)
 
@@ -66,9 +66,9 @@ CubeSat 동역학 모델은 리액션 휠 각속도와 휠 구동 토크를 입�
 
 계산된 본체 쿼터니언과 각속도는 PD 제어기로 피드백되어 목표 자세에 대한 오차를 지속적으로 보정합니다.
 
-## 5. Simulation Results
+## 5. 시뮬레이션 결과
 
-### Target Attitude
+### 목표 자세
 
 각 축의 목표 자세를 다음과 같이 설정하였습니다.
 
@@ -78,11 +78,11 @@ CubeSat 동역학 모델은 리액션 휠 각속도와 휠 구동 토크를 입�
 | Y-axis | 7° |
 | Z-axis | 10° |
 
-- **Simulation Time:** 200 s
-- **Initial Attitude:** [0°, 0°, 0°]
-- **Euler Rotation Sequence:** XYZ
+- **시뮬레이션 시간:** 200 s
+- **초기 상태:** [0°, 0°, 0°]
+- **오일러 각 순서:** XYZ
 
-### Attitude Response
+### 응답 확인
 
 ![Attitude Control Result](PD_to_Wheel/images/simulation_result.png)
 
@@ -96,21 +96,21 @@ CubeSat 동역학 모델은 리액션 휠 각속도와 휠 구동 토크를 입�
 
 200초 시뮬레이션 구간에서 세 축 모두 지속적인 진동이나 발산 없이 목표 자세를 유지하였습니다.
 
-## 6. Conclusion
+## 6. 결론
 
-본 프로젝트에서는 MATLAB/Simulink를 활용하여 **쿼터니언 기반 PD 제어기, 3축 리액션 휠, CubeSat 회전 동역학을 통합한 폐루프 자세제어 시스템**을 구현하였습니다.
+MATLAB/Simulink를 활용하여 **쿼터니언 기반 PD 제어기, 3축 리액션 휠, CubeSat 회전 동역학을 통합한 폐루프 자세제어 시스템**을 구현하였습니다.
 
 시뮬레이션을 통해 목표 자세 [5°, 7°, 10°]에 대한 3축 자세제어 응답을 확인하였으며, 각 축이 목표 각도로 수렴하는 결과를 얻었습니다.
 
 향후 실제 리액션 휠 하드웨어와의 연동 및 외란을 고려한 자세제어 성능 검증을 진행할 수 있습니다.
 
-## 7. Development Environment
+## 7. 개발 환경
 
 - MATLAB
 - Simulink
 - MATLAB Function Blocks
 - Quaternion to Rotation Angles (XYZ)
 
-## 8. Simulink Model
+## 8. 모델 파일명
 
 - `pd_to_wheel_main.slx` — 3축 CubeSat 자세제어 통합 Simulink 모델
