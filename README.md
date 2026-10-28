@@ -1,4 +1,5 @@
-# CubeSat 3-Axis Attitude Control Using Reaction Wheels
+
+# CubeSat 3-Axis Attitude Control Using Reaction Wheel
 
 MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 CubeSat 자세제어 시뮬레이션** 프로젝트입니다.
 
@@ -26,18 +27,17 @@ MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 Cube
 
 제어 법칙은 다음과 같습니다.
 
-\[
-\boldsymbol{\tau}_{cmd}
-=K_p\mathbf{e}_q-K_d\boldsymbol{\omega}_b
-\]
+$$
+\boldsymbol{\tau}_{cmd} = K_p \mathbf{e}_q - K_d \boldsymbol{\omega}_b
+$$
 
 여기서,
 
-- \(\boldsymbol{\tau}_{cmd}\): 본체 요구 제어 토크
-- \(K_p\): 비례 제어 이득
-- \(K_d\): 미분 제어 이득
-- \(\mathbf{e}_q\): 쿼터니언 기반 자세 오차 벡터
-- \(\boldsymbol{\omega}_b\): 위성 본체 각속도
+- $\boldsymbol{\tau}_{cmd}$ : 본체 요구 제어 토크
+- $K_p$ : 비례 제어 이득
+- $K_d$ : 미분 제어 이득
+- $\mathbf{e}_q$ : 쿼터니언 기반 자세 오차 벡터
+- $\boldsymbol{\omega}_b$ : 위성 본체 각속도
 
 ### Controller Parameters
 
@@ -81,9 +81,9 @@ CubeSat 동역학 모델은 리액션 휠 각속도와 구동 토크를 입력�
 
 또한 쿼터니언 미분 방정식을 통해 본체 자세를 계산하고, 수치 적분 과정에서 발생할 수 있는 오차를 줄이기 위해 쿼터니언 정규화를 적용하였습니다.
 
-\[
-\dot{\mathbf{q}}=\frac{1}{2}\Omega(\boldsymbol{\omega}_b)\mathbf{q}
-\]
+$$
+\dot{\mathbf{q}} = \frac{1}{2}\Omega(\boldsymbol{\omega}_b)\mathbf{q}
+$$
 
 계산된 쿼터니언과 본체 각속도는 PD 제어기로 피드백되어 목표 자세에 대한 오차를 지속적으로 보정합니다.
 
