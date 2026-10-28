@@ -1,7 +1,6 @@
-
 # CubeSat 3-Axis Attitude Control Using Reaction Wheel
 
-MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 CubeSat 자세제어 시뮬레이션** 입니다.
+MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 CubeSat 자세제어 시뮬레이션**입니다.
 
 쿼터니언(Quaternion) 기반 자세 오차를 계산하고, PD 제어기를 통해 생성된 제어 토크를 X, Y, Z축 리액션 휠에 전달하여 위성의 자세를 목표 각도로 수렴시키는 폐루프(Closed-loop) 자세제어 시스템을 구현하였습니다.
 
@@ -15,7 +14,7 @@ MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 Cube
 - **리액션 휠:** 제어 토크에 따라 3축 리액션 휠을 구동하고 휠 각속도 및 구동 토크 계산
 - **큐브샛 동역학:** 리액션 휠의 구동 토크를 반영하여 위성의 각속도와 자세 변화 계산
 
-각 서브시스템은 피드백 구조로 연결되며, 본체의 자세와 각속도를 실시간으로 제어기에 전달합니다.
+각 서브시스템은 피드백 구조로 연결되며, 본체의 자세와 각속도를 제어기로 전달합니다.
 
 ## 2. PD Attitude Controller
 
@@ -23,21 +22,7 @@ MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 Cube
 
 위성의 목표 자세와 현재 자세를 쿼터니언으로 표현하고, 두 쿼터니언 사이의 자세 오차를 계산합니다.
 
-계산된 자세 오차와 본체 각속도를 이용하여 PD 제어 토크를 생성합니다.
-
-제어 법칙은 다음과 같습니다.
-
-$$
-\boldsymbol{\tau}_{cmd} = K_p \mathbf{e}_q - K_d \boldsymbol{\omega}_b
-$$
-
-여기서,
-
-- $\boldsymbol{\tau}_{cmd}$ : 본체 요구 제어 토크
-- $K_p$ : 비례 제어 이득
-- $K_d$ : 미분 제어 이득
-- $\mathbf{e}_q$ : 쿼터니언 기반 자세 오차 벡터
-- $\boldsymbol{\omega}_b$ : 위성 본체 각속도
+계산된 쿼터니언 오차에 비례 이득(Kp)을 적용하고, 본체 각속도에 미분 이득(Kd)을 적용하여 본체 요구 토크를 생성합니다.
 
 ### Controller Parameters
 
@@ -53,39 +38,21 @@ $$
 
 ![Reaction Wheel Subsystem](PD_to_Wheel/images/reaction_wheel.png)
 
-PD 제어기에서 생성된 3축 제어 토크를 X, Y, Z축 리액션 휠에 각각 전달하도록 구성하였습니다.
+PD 제어기에서 생성된 본체 요구 토크를 X, Y, Z축으로 분리하여 각 리액션 휠에 전달하도록 구성하였습니다.
 
-각 리액션 휠 모델은 입력 제어 토크에 따른 휠 구동 토크와 각속도를 계산합니다.
-
-실제 리액션 휠의 동작 범위를 고려하여 토크 및 회전속도 제한을 적용하였으며, 제어 명령의 이산화와 구동 응답 특성을 모델에 반영하였습니다.
-
-### Reaction Wheel Parameters
-
-| Parameter | Value |
-|---|---|
-| Reaction Wheel | MomentumSpace mRE-005-P 기반 |
-| Number of Wheels | 3 (X, Y, Z) |
-| Maximum Torque | ±1 mN·m |
-| Maximum Wheel Speed | ±6000 RPM |
-| Assumed Time Constant | 0.05 s |
-| Control Update Period | 0.2 s |
-| Torque Quantization | 1×10⁻⁶ N·m |
+각 리액션 휠은 입력된 토크 명령에 따라 휠 각속도와 휠 구동 토크를 계산하며, 세 축의 출력은 각각 통합되어 CubeSat 동역학 모델에 전달됩니다.
 
 ## 4. CubeSat Attitude Dynamics
 
 ![CubeSat Dynamics](PD_to_Wheel/images/cubesat_dynamics.png)
 
-CubeSat 동역학 모델은 리액션 휠 각속도와 구동 토크를 입력받아 위성 본체의 각속도 및 자세를 계산합니다.
+CubeSat 동역학 모델은 리액션 휠 각속도와 휠 구동 토크를 입력받아 위성 본체의 각속도 및 자세를 계산합니다.
 
-본체의 회전 운동은 강체 회전 동역학을 기반으로 구현하였으며, 각속도를 적분하여 본체의 운동 상태를 갱신합니다.
+본체의 회전 운동은 3축 동역학 블록을 통해 계산하며, 계산된 각속도를 적분하여 본체 각속도를 갱신합니다.
 
-또한 쿼터니언 미분 방정식을 통해 본체 자세를 계산하고, 수치 적분 과정에서 발생할 수 있는 오차를 줄이기 위해 쿼터니언 정규화를 적용하였습니다.
+또한 쿼터니언 미분 및 적분 과정을 통해 본체 자세를 계산하고, 쿼터니언 정규화 블록을 적용하였습니다.
 
-$$
-\dot{\mathbf{q}} = \frac{1}{2}\Omega(\boldsymbol{\omega}_b)\mathbf{q}
-$$
-
-계산된 쿼터니언과 본체 각속도는 PD 제어기로 피드백되어 목표 자세에 대한 오차를 지속적으로 보정합니다.
+계산된 본체 쿼터니언과 각속도는 PD 제어기로 피드백되어 목표 자세에 대한 오차를 지속적으로 보정합니다.
 
 ## 5. Simulation Results
 
@@ -129,8 +96,8 @@ $$
 
 - MATLAB
 - Simulink
-- Aerospace Blockset 관련 회전 변환 블록
 - MATLAB Function Blocks
+- Quaternion to Rotation Angles (XYZ)
 
 ## 8. Simulink Model
 
