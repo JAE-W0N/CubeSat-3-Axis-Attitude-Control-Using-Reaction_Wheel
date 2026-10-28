@@ -30,7 +30,7 @@ MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 Cube
 |---|---|
 | Kp | 0.004 |
 | Kd | 0.02 |
-| Attitude Representation | Quaternion |
+| Attitude | Quaternion |
 | Euler Rotation Order | XYZ |
 | Control Method | PD Control |
 
