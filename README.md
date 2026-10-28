@@ -108,8 +108,6 @@ MATLAB/Simulink를 활용하여 **쿼터니언 기반 PD 제어기, 3축 리액�
 
 - MATLAB
 - Simulink
-- MATLAB Function Blocks
-- Quaternion to Rotation Angles (XYZ)
 
 ## 8. 모델 파일명
 
