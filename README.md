@@ -34,7 +34,7 @@ MATLAB/Simulink 기반의 **PD 제어기와 3축 리액션 휠을 이용한 Cube
 | Euler Rotation Order | XYZ |
 | Control Method | PD Control |
 
-## 3. Three-Axis Reaction Wheel
+## 3. Three-Axis Wheel
 
 ![Reaction Wheel Subsystem](PD_to_Wheel/images/reaction_wheel.png)
 
