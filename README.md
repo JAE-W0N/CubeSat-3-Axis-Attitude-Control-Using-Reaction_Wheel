@@ -42,6 +42,18 @@ PD 제어기에서 생성된 본체 요구 토크를 X, Y, Z축으로 분리하�
 
 각 리액션 휠은 입력된 토크 명령에 따라 휠 각속도와 휠 구동 토크를 계산하며, 세 축의 출력은 각각 통합되어 CubeSat 동역학 모델에 전달됩니다.
 
+### 3-1. X-axis Reaction Wheel
+
+![X-axis Reaction Wheel](PD_to_Wheel/images/X-axis_Wheel.png)
+
+X축 리액션 휠은 PD 제어기에서 전달된 본체 요구 토크를 입력받아 휠 각속도와 휠 구동 토크를 계산하도록 구성하였습니다.
+
+입력 토크는 부호 변환 후 **휠 토크 제한(Torque Saturation)** 및 **토크 응답 시정수** 블록을 거치며, 속도 제한 로직을 통해 휠의 회전속도 범위를 고려합니다.
+
+이후 휠 관성모멘트를 적용하여 각가속도를 계산하고, 적분 블록을 통해 휠 각속도를 산출합니다. 계산된 휠 각속도는 속도 제한 로직으로 피드백됩니다.
+
+**Y축과 Z축 리액션 휠에도 동일한 제어 및 동역학 구조를 적용**하여 3축 리액션 휠 시스템을 구성하였습니다.
+
 ## 4. CubeSat Attitude Dynamics
 
 ![CubeSat Dynamics](PD_to_Wheel/images/cubesat_dynamics.png)
