@@ -134,4 +134,4 @@ CubeSat 동역학 모델은 리액션 휠 각속도와 구동 토크를 입력�
 
 ## 8. Simulink Model
 
-- `pd_to_wheel_3.slx` — 3축 CubeSat 자세제어 통합 Simulink 모델
+- `pd_to_wheel_main.slx` — 3축 CubeSat 자세제어 통합 Simulink 모델
